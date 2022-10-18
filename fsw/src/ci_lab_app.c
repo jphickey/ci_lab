@@ -1,29 +1,25 @@
-/*******************************************************************************
-**
-**      GSC-18128-1, "Core Flight Executive Version 6.7"
-**
-**      Copyright (c) 2006-2019 United States Government as represented by
-**      the Administrator of the National Aeronautics and Space Administration.
-**      All Rights Reserved.
-**
-**      Licensed under the Apache License, Version 2.0 (the "License");
-**      you may not use this file except in compliance with the License.
-**      You may obtain a copy of the License at
-**
-**        http://www.apache.org/licenses/LICENSE-2.0
-**
-**      Unless required by applicable law or agreed to in writing, software
-**      distributed under the License is distributed on an "AS IS" BASIS,
-**      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-**      See the License for the specific language governing permissions and
-**      limitations under the License.
-**
-** File: ci_lab_app.c
-**
-** Purpose:
-**   This file contains the source code for the Command Ingest task.
-**
-*******************************************************************************/
+/************************************************************************
+ * NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+ *
+ * Copyright (c) 2020 United States Government as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ************************************************************************/
+
+/**
+ * \file
+ *   This file contains the source code for the Command Ingest task.
+ */
 
 /*
 **   Include Files:
@@ -50,19 +46,13 @@
 */
 CI_LAB_GlobalData_t CI_LAB_Global;
 
-static CFE_EVS_BinFilter_t CI_LAB_EventFilters[] =
-    {/* Event ID    mask */
-     {CI_LAB_SOCKETCREATE_ERR_EID, 0x0000}, {CI_LAB_SOCKETBIND_ERR_EID, 0x0000}, {CI_LAB_STARTUP_INF_EID, 0x0000},
-     {CI_LAB_COMMAND_ERR_EID, 0x0000},      {CI_LAB_COMMANDNOP_INF_EID, 0x0000}, {CI_LAB_COMMANDRST_INF_EID, 0x0000},
-     {CI_LAB_INGEST_INF_EID, 0x0000},       {CI_LAB_INGEST_LEN_ERR_EID, 0x0000}, {CI_LAB_INGEST_ALLOC_ERR_EID, 0x0000},
-     {CI_LAB_INGEST_SEND_ERR_EID, 0x0000}};
-
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* CI_Lab_AppMain() -- Application entry point and main process loop          */
+/*                                                                            */
+/* Application entry point and main process loop                              */
 /* Purpose: This is the Main task event loop for the Command Ingest Task      */
 /*            The task handles all interfaces to the data system through      */
 /*            the software bus. There is one pipeline into this task          */
-/*            The task is scheduled by input into this pipeline.               */
+/*            The task is scheduled by input into this pipeline.              */
 /*            It can receive Commands over this pipeline                      */
 /*            and acts accordingly to process them.                           */
 /*                                                                            */
@@ -102,8 +92,7 @@ void CI_Lab_AppMain(void)
     }
 
     CFE_ES_ExitApp(RunStatus);
-
-} /* End of CI_Lab_AppMain() */
+}
 
 /*
 ** CI delete callback function.
@@ -118,7 +107,7 @@ void CI_LAB_delete_callback(void)
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
 /*                                                                            */
-/* CI_LAB_TaskInit() -- CI initialization                                     */
+/* CI initialization                                                          */
 /*                                                                            */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 void CI_LAB_TaskInit(void)
@@ -128,8 +117,7 @@ void CI_LAB_TaskInit(void)
 
     memset(&CI_LAB_Global, 0, sizeof(CI_LAB_Global));
 
-    CFE_EVS_Register(CI_LAB_EventFilters, sizeof(CI_LAB_EventFilters) / sizeof(CFE_EVS_BinFilter_t),
-                     CFE_EVS_EventFilter_BINARY);
+    CFE_EVS_Register(NULL, 0, CFE_EVS_EventFilter_BINARY);
 
     CFE_SB_CreatePipe(&CI_LAB_Global.CommandPipe, CI_LAB_PIPE_DEPTH, "CI_LAB_CMD_PIPE");
     CFE_SB_Subscribe(CFE_SB_ValueToMsgId(CI_LAB_CMD_MID), CI_LAB_Global.CommandPipe);
@@ -173,11 +161,9 @@ void CI_LAB_TaskInit(void)
 
     CFE_EVS_SendEvent(CI_LAB_STARTUP_INF_EID, CFE_EVS_EventType_INFORMATION, "CI Lab Initialized.%s",
                       CI_LAB_VERSION_STRING);
-
-} /* End of CI_LAB_TaskInit() */
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*  Name:  CI_LAB_Noop                                                         */
 /*                                                                             */
 /*  Purpose:                                                                   */
 /*     Handle NOOP command packets                                             */
@@ -194,7 +180,6 @@ int32 CI_LAB_Noop(const CI_LAB_NoopCmd_t *data)
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*  Name:  CI_LAB_ResetCounters                                                */
 /*                                                                             */
 /*  Purpose:                                                                   */
 /*     Handle ResetCounters command packets                                    */
@@ -208,13 +193,13 @@ int32 CI_LAB_ResetCounters(const CI_LAB_ResetCountersCmd_t *data)
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-/*  Name:  CI_LAB_ReportHousekeeping                                          */
 /*                                                                            */
 /*  Purpose:                                                                  */
 /*         This function is triggered in response to a task telemetry request */
 /*         from the housekeeping task. This function will gather the CI task  */
 /*         telemetry, packetize it and send it to the housekeeping task via   */
 /*         the software bus                                                   */
+/*                                                                            */
 /* * * * * * * * * * * * * * * * * * * * * * * *  * * * * * * *  * *  * * * * */
 int32 CI_LAB_ReportHousekeeping(const CFE_MSG_CommandHeader_t *data)
 {
@@ -222,11 +207,9 @@ int32 CI_LAB_ReportHousekeeping(const CFE_MSG_CommandHeader_t *data)
     CFE_SB_TimeStampMsg(CFE_MSG_PTR(CI_LAB_Global.HkTlm.TelemetryHeader));
     CFE_SB_TransmitMsg(CFE_MSG_PTR(CI_LAB_Global.HkTlm.TelemetryHeader), true);
     return CFE_SUCCESS;
-
-} /* End of CI_LAB_ReportHousekeeping() */
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-/*  Name:  CI_LAB_ResetCounters_Internal                                      */
 /*                                                                            */
 /*  Purpose:                                                                  */
 /*         This function resets all the global counter variables that are     */
@@ -242,14 +225,11 @@ void CI_LAB_ResetCounters_Internal(void)
     /* Status of packets ingested by CI task */
     CI_LAB_Global.HkTlm.Payload.IngestPackets = 0;
     CI_LAB_Global.HkTlm.Payload.IngestErrors  = 0;
-
-    return;
-
-} /* End of CI_LAB_ResetCounters() */
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 /*                                                                            */
-/* CI_LAB_ReadUpLink() --                                                     */
+/* --                                                                         */
 /*                                                                            */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 void CI_LAB_ReadUpLink(void)
@@ -381,7 +361,4 @@ void CI_LAB_ReadUpLink(void)
     {
         CFE_SB_ReleaseMessageBuffer(NextIngestBufPtr);
     }
-
-    return;
-
-} /* End of CI_LAB_ReadUpLink() */
+}
