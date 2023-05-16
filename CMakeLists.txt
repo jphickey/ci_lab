@@ -3,6 +3,7 @@ project(CFS_CI_LAB C)
 
 set(APP_SRC_FILES
     fsw/src/ci_lab_app.c
+    fsw/src/ci_lab_eds_dispatch.c
 )
 
 # Create the app module
