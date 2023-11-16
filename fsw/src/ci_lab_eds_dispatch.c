@@ -30,7 +30,9 @@
 */
 
 #include "ci_lab_app.h"
-#include "ci_lab_events.h"
+#include "ci_lab_eventids.h"
+#include "ci_lab_dispatch.h"
+#include "ci_lab_cmds.h"
 
 #include "ci_lab_eds_dictionary.h"
 #include "ci_lab_eds_dispatcher.h"
@@ -41,14 +43,14 @@
 static const CI_LAB_Application_Component_Telecommand_DispatchTable_t CI_LAB_TC_DISPATCH_TABLE = {
     .CMD =
         {
-            .NoopCmd_indication          = CI_LAB_Noop,
-            .ResetCountersCmd_indication = CI_LAB_ResetCounters,
+            .NoopCmd_indication          = CI_LAB_NoopCmd,
+            .ResetCountersCmd_indication = CI_LAB_ResetCountersCmd,
 
         },
-    .SEND_HK = {.indication = CI_LAB_ReportHousekeeping}};
+    .SEND_HK = {.indication = CI_LAB_SendHkCmd}};
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-/*  Name:  CI_LAB_ProcessCommandPacket                                        */
+/*  Name:  CI_LAB_TaskPipe                                        */
 /*                                                                            */
 /*  Purpose:                                                                  */
 /*     This routine will process any packet that is received on the CI command*/
@@ -59,7 +61,7 @@ static const CI_LAB_Application_Component_Telecommand_DispatchTable_t CI_LAB_TC_
 /*        3. Request for housekeeping telemetry packet (from HS task)         */
 /*                                                                            */
 /* * * * * * * * * * * * * * * * * * * * * * * *  * * * * * * *  * *  * * * * */
-void CI_LAB_ProcessCommandPacket(CFE_SB_Buffer_t *SBBufPtr)
+void CI_LAB_TaskPipe(const CFE_SB_Buffer_t *SBBufPtr)
 {
     CFE_SB_MsgId_t MsgId;
     CFE_Status_t   Status;
@@ -73,8 +75,8 @@ void CI_LAB_ProcessCommandPacket(CFE_SB_Buffer_t *SBBufPtr)
     {
         CFE_MSG_GetMsgId(&SBBufPtr->Msg, &MsgId);
         CI_LAB_Global.HkTlm.Payload.CommandErrorCounter++;
-        CFE_EVS_SendEvent(CI_LAB_COMMAND_ERR_EID, CFE_EVS_EventType_ERROR, "CI: invalid command packet,MID = 0x%x",
+        CFE_EVS_SendEvent(CI_LAB_MID_ERR_EID, CFE_EVS_EventType_ERROR, "CI: invalid command packet,MID = 0x%x",
                           (unsigned int)CFE_SB_MsgIdToValue(MsgId));
     }
 
-} /* End CI_LAB_ProcessCommandPacket */
+} /* End CI_LAB_TaskPipe */

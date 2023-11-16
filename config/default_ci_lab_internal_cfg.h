@@ -18,15 +18,33 @@
 
 /**
  * @file
- *   Define CI Lab Message IDs
+ *   CI_LAB Application Private Config Definitions
+ *
+ * This provides default values for configurable items that are internal
+ * to this module and do NOT affect the interface(s) of this module.  Changes
+ * to items in this file only affect the local module and will be transparent
+ * to external entities that are using the public interface(s).
+ *
+ * @note This file may be overridden/superceded by mission-provided defintions
+ * either by overriding this header or by generating definitions from a command/data
+ * dictionary tool.
  */
-#ifndef CI_LAB_MSGIDS_H
-#define CI_LAB_MSGIDS_H
+#ifndef CI_LAB_INTERNAL_CFG_H
+#define CI_LAB_INTERNAL_CFG_H
 
-#include "cfe_msgids.h"
+/**
+ * @brief The size of the input buffer
+ *
+ * This definition controls the maximum size message that can be ingested
+ * from the UDP socket
+ */
+#define CI_LAB_MAX_INGEST 768
 
-#define CI_LAB_CMD_MID     CFE_PLATFORM_CMD_TOPICID_TO_MID(CFE_MISSION_CI_LAB_CMD_TOPICID)
-#define CI_LAB_SEND_HK_MID CFE_PLATFORM_CMD_TOPICID_TO_MID(CFE_MISSION_CI_LAB_SEND_HK_TOPICID)
-#define CI_LAB_HK_TLM_MID  CFE_PLATFORM_TLM_TOPICID_TO_MID(CFE_MISSION_CI_LAB_HK_TLM_TOPICID)
+/**
+ * @brief The depth of the command input pipe
+ *
+ * This controls the depth of the SB input pipe
+ */
+#define CI_LAB_PIPE_DEPTH 32
 
 #endif

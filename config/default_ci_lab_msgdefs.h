@@ -18,19 +18,30 @@
 
 /**
  * @file
- *  Define CI Lab Messages and info
+ *   Specification for the CI_LAB command and telemetry
+ *   message constant definitions.
+ *
+ *  For CI_LAB this is only the function/command code definitions
  */
-#ifndef CI_LAB_MSG_H
-#define CI_LAB_MSG_H
+#ifndef CI_LAB_MSGDEFS_H
+#define CI_LAB_MSGDEFS_H
 
-/*
- * EDS-defined function codes (*_CC)
- */
-#include "ci_lab_eds_cc.h"
+#include "ci_lab_fcncodes.h"
 
+/*************************************************************************/
 /*
- * EDS-defined message data types
- */
-#include "ci_lab_eds_typedefs.h"
+** Payload definition (CI_LAB housekeeping)...
+*/
+typedef struct
+{
+    uint8  CommandErrorCounter;
+    uint8  CommandCounter;
+    uint8  EnableChecksums;
+    uint8  SocketConnected;
+    uint8  Spare1[8];
+    uint32 IngestPackets;
+    uint32 IngestErrors;
+    uint32 Spare2;
+} CI_LAB_HkTlm_Payload_t;
 
 #endif
