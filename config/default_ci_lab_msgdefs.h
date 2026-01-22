@@ -19,12 +19,10 @@
 /**
  * @file
  *   Specification for the CI_LAB command and telemetry
- *   message constant definitions.
- *
- *  For CI_LAB this is only the function/command code definitions
+ *   message payload and constant definitions.
  */
-#ifndef CI_LAB_MSGDEFS_H
-#define CI_LAB_MSGDEFS_H
+#ifndef DEFAULT_CI_LAB_MSGDEFS_H
+#define DEFAULT_CI_LAB_MSGDEFS_H
 
 #include "ci_lab_fcncodes.h"
 
@@ -34,8 +32,8 @@
 */
 typedef struct
 {
-    uint8  CommandErrorCounter;
     uint8  CommandCounter;
+    uint8  CommandErrorCounter;
     uint8  EnableChecksums;
     uint8  SocketConnected;
     uint8  Spare1[8];

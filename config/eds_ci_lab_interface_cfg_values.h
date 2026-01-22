@@ -18,12 +18,22 @@
 
 /**
  * @file
- *   Define CI Lab Performance IDs
+ *   CI_LAB Application Public Definitions
+ *
+ * This provides default values for configurable items that affect
+ * the interface(s) of this module.  This includes the CMD/TLM message
+ * interface, tables definitions, and any other data products that
+ * serve to exchange information with other entities.
+ *
+ * @note This file may be overridden/superceded by mission-provided definitions
+ * either by overriding this header or by generating definitions from a command/data
+ * dictionary tool.
  */
-#ifndef DEFAULT_CI_LAB_PERFIDS_H
-#define DEFAULT_CI_LAB_PERFIDS_H
+#ifndef EDS_CI_LAB_INTERFACE_CFG_H
+#define EDS_CI_LAB_INTERFACE_CFG_H
 
-#define CI_LAB_MAIN_TASK_PERF_ID  32
-#define CI_LAB_SOCKET_RCV_PERF_ID 33
+#include "ci_lab_eds_designparameters.h"
+
+#define CI_LAB_MISSION_CFGVAL(x) EdsParam_CI_LAB_##x
 
 #endif

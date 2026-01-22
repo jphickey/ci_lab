@@ -25,8 +25,8 @@
  *   Constants and enumerated types related to these message structures
  *   are defined in ci_lab_msgdefs.h.
  */
-#ifndef CI_LAB_MSGSTRUCT_H
-#define CI_LAB_MSGSTRUCT_H
+#ifndef DEFAULT_CI_LAB_MSGSTRUCT_H
+#define DEFAULT_CI_LAB_MSGSTRUCT_H
 
 /************************************************************************
  * Includes

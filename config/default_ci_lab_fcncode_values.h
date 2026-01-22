@@ -18,12 +18,26 @@
 
 /**
  * @file
- *   Define CI Lab Performance IDs
+ *   Specification for the CI_LAB command function codes
+ *
+ * @note
+ *   This file should be strictly limited to the command/function code (CC)
+ *   macro definitions.  Other definitions such as enums, typedefs, or other
+ *   macros should be placed in the msgdefs.h or msg.h files.
  */
-#ifndef DEFAULT_CI_LAB_PERFIDS_H
-#define DEFAULT_CI_LAB_PERFIDS_H
+#ifndef DEFAULT_CI_LAB_FCNCODE_VALUES_H
+#define DEFAULT_CI_LAB_FCNCODE_VALUES_H
 
-#define CI_LAB_MAIN_TASK_PERF_ID  32
-#define CI_LAB_SOCKET_RCV_PERF_ID 33
+/************************************************************************
+ * Macro Definitions
+ ************************************************************************/
+
+#define CI_LAB_CCVAL(x) CI_LAB_FunctionCode_##x
+
+enum CI_LAB_FunctionCode
+{
+    CI_LAB_FunctionCode_NOOP           = 0,
+    CI_LAB_FunctionCode_RESET_COUNTERS = 1,
+};
 
 #endif

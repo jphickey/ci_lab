@@ -18,12 +18,15 @@
 
 /**
  * @file
- *   Define CI Lab Performance IDs
+ *   Specification for the CI_LAB command and telemetry
+ *   message data types.
  */
-#ifndef DEFAULT_CI_LAB_PERFIDS_H
-#define DEFAULT_CI_LAB_PERFIDS_H
+#ifndef EDS_CI_LAB_MSGSTRUCT_H
+#define EDS_CI_LAB_MSGSTRUCT_H
 
-#define CI_LAB_MAIN_TASK_PERF_ID  32
-#define CI_LAB_SOCKET_RCV_PERF_ID 33
+/************************************************************************
+ * Includes
+ ************************************************************************/
+#include "ci_lab_eds_typedefs.h"
 
 #endif

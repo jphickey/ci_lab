@@ -25,12 +25,14 @@
  * interface, tables definitions, and any other data products that
  * serve to exchange information with other entities.
  *
- * @note This file may be overridden/superceded by mission-provided defintions
+ * @note This file may be overridden/superceded by mission-provided definitions
  * either by overriding this header or by generating definitions from a command/data
  * dictionary tool.
  */
 #ifndef CI_LAB_INTERFACE_CFG_H
 #define CI_LAB_INTERFACE_CFG_H
+
+#include "ci_lab_interface_cfg_values.h"
 
 /**
  * @brief The base UDP port where CI_LAB will listen for incoming messages
@@ -45,6 +47,7 @@
  *
  * And so forth for however many processor numbers exist in the system
  */
-#define CI_LAB_BASE_UDP_PORT 1234
+#define CI_LAB_MISSION_BASE_UDP_PORT         CI_LAB_MISSION_CFGVAL(BASE_UDP_PORT)
+#define DEFAULT_CI_LAB_MISSION_BASE_UDP_PORT 1234
 
 #endif

@@ -18,24 +18,22 @@
 
 /**
  * @file
- *   Specification for the CI_LAB command function codes
+ *   Specification for the CFE Executive Services (CI_LAB) command function codes
  *
  * @note
  *   This file should be strictly limited to the command/function code (CC)
  *   macro definitions.  Other definitions such as enums, typedefs, or other
  *   macros should be placed in the msgdefs.h or msg.h files.
  */
-#ifndef CI_LAB_FCNCODES_H
-#define CI_LAB_FCNCODES_H
+#ifndef EDS_CI_LAB_FCNCODES_H
+#define EDS_CI_LAB_FCNCODES_H
+
+#include "ci_lab_eds_cc.h"
 
 /************************************************************************
  * Macro Definitions
  ************************************************************************/
 
-/*
-** CI_LAB command codes
-*/
-#define CI_LAB_NOOP_CC                 0
-#define CI_LAB_RESET_COUNTERS_CC       1
+#define CI_LAB_CCVAL(x) EDS_CONTAINER_CI_LAB_##x##_CC
 
 #endif

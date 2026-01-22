@@ -18,18 +18,19 @@
 
 /**
  * @file
+ *   CI_LAB Application Public Definitions
  *
- * CI_LAB Application Mission Configuration Header File
+ * This provides default values for configurable items that affect
+ * the interface(s) of this module.  This includes the CMD/TLM message
+ * interface, tables definitions, and any other data products that
+ * serve to exchange information with other entities.
  *
- * This is a compatibility header for the "mission_cfg.h" file that has
- * traditionally provided public config definitions for each CFS app.
- *
- * @note This file may be overridden/superceded by mission-provided defintions
+ * @note This file may be overridden/superceded by mission-provided definitions
  * either by overriding this header or by generating definitions from a command/data
  * dictionary tool.
  */
-#ifndef CI_LAB_MISSION_CFG_H
-#define CI_LAB_MISSION_CFG_H
+#ifndef DEFAULT_CI_LAB_MISSION_CFG_H
+#define DEFAULT_CI_LAB_MISSION_CFG_H
 
 #include "ci_lab_interface_cfg.h"
 

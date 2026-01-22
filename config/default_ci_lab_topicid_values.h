@@ -18,12 +18,11 @@
 
 /**
  * @file
- *   Define CI Lab Performance IDs
+ *   CI_LAB Application Topic IDs
  */
-#ifndef DEFAULT_CI_LAB_PERFIDS_H
-#define DEFAULT_CI_LAB_PERFIDS_H
+#ifndef DEFAULT_CI_LAB_TOPICID_VALUES_H
+#define DEFAULT_CI_LAB_TOPICID_VALUES_H
 
-#define CI_LAB_MAIN_TASK_PERF_ID  32
-#define CI_LAB_SOCKET_RCV_PERF_ID 33
+#define CI_LAB_MISSION_TIDVAL(x) DEFAULT_CI_LAB_MISSION_##x##_TOPICID
 
 #endif
