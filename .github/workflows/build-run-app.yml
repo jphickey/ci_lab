@@ -19,4 +19,4 @@ jobs:
     name: Build and run with startup msg verification
     uses: jphickey/cFS/.github/workflows/build-run-app-reusable.yml@fix-998-workflow-config
     with:
-      eds-enabled: true
+      enable-eds: true
